@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/grumbs/health"
+	"github.com/gocrumb/health"
 )
 
 const (

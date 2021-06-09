@@ -3,8 +3,8 @@ package health_test
 import (
 	"time"
 
-	"github.com/grumbs/health"
-	"github.com/grumbs/health/http"
+	"github.com/gocrumb/health"
+	"github.com/gocrumb/health/http"
 )
 
 func ExampleMonitor() {

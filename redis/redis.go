@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/go-redis/redis"
-	"github.com/grumbs/health"
+	"github.com/gocrumb/health"
 )
 
 const (

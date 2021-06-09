@@ -1,4 +1,4 @@
-module github.com/grumbs/health
+module github.com/gocrumb/health
 
 go 1.16
 

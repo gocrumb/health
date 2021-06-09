@@ -5,7 +5,7 @@ package mongo
 import (
 	"time"
 
-	"github.com/grumbs/health"
+	"github.com/gocrumb/health"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
