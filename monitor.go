@@ -42,6 +42,6 @@ func (m *Monitor) Status() Status {
 
 func (m *Monitor) Endpoint() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		io.WriteString(w, m.Status().GoString())
+		io.WriteString(w, m.Status().String())
 	})
 }
