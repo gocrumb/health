@@ -9,7 +9,7 @@ import (
 
 func ExampleMonitor() {
 	m := health.New(
-		health.WithChecks(
+		health.Checks(
 			http.Head("http://example.com/", http.Period(1*time.Minute)),
 		),
 	)
