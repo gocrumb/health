@@ -6,7 +6,7 @@ Monitor and track health of services, send heartbeats (to-do), and expose status
 
 ## Installation
 
-Install event using the go get command:
+Install health using the go get command:
 
 ```
 $ go get github.com/gocrumb/health
