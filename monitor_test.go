@@ -1,7 +1,6 @@
 package health_test
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/grumbs/health"
@@ -15,8 +14,4 @@ func ExampleMonitor() {
 		),
 	)
 	m.Start()
-
-	fmt.Println(m.Status())
-	// Output:
-	// 0
 }
