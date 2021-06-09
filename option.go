@@ -12,8 +12,12 @@ func (o OptionFunc) Apply(m *Monitor) {
 
 func WithChecks(checks ...Check) Option {
 	return OptionFunc(func(m *Monitor) {
-		for _, c := range checks {
-			m.services = append(m.services, service{check: c})
-		}
+		m.checks = append(m.checks, checks...)
+	})
+}
+
+func OnFailure(fn func()) Option {
+	return OptionFunc(func(m *Monitor) {
+		m.failfns = append(m.failfns, fn)
 	})
 }
