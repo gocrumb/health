@@ -15,12 +15,14 @@ type Monitor struct {
 	wg         sync.WaitGroup
 	stop, done chan struct{}
 	failfns    []func()
+	l          *log.Logger
 }
 
 func New(opts ...Option) *Monitor {
 	m := Monitor{
 		states: map[Check]State{},
 		trs:    make(chan transaction),
+		l:      log.New(io.Discard, "", 0),
 	}
 	for _, o := range opts {
 		o.Apply(&m)
@@ -29,7 +31,7 @@ func New(opts ...Option) *Monitor {
 }
 
 func (m *Monitor) Start() {
-	log.Print("Starting")
+	m.l.Print("Starting")
 
 	m.stop = make(chan struct{})
 	m.done = make(chan struct{})
@@ -82,7 +84,7 @@ func (m *Monitor) Start() {
 }
 
 func (m *Monitor) Stop() {
-	log.Print("Stopping")
+	m.l.Print("Stopping")
 
 	close(m.stop)
 	m.wg.Wait()
@@ -105,7 +107,7 @@ func (m *Monitor) loop() {
 					}
 				}
 				if m.status != status {
-					log.Printf("%s -> %s", m.status, status)
+					m.l.Printf("%s -> %s", m.status, status)
 					m.status = status
 				}
 

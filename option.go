@@ -1,5 +1,7 @@
 package health
 
+import "log"
+
 type Option interface {
 	Apply(*Monitor)
 }
@@ -10,9 +12,15 @@ func (o OptionFunc) Apply(m *Monitor) {
 	o(m)
 }
 
-func WithChecks(checks ...Check) Option {
+func Checks(checks ...Check) Option {
 	return OptionFunc(func(m *Monitor) {
 		m.checks = append(m.checks, checks...)
+	})
+}
+
+func Logger(l *log.Logger) Option {
+	return OptionFunc(func(m *Monitor) {
+		m.l = l
 	})
 }
 
