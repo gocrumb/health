@@ -31,6 +31,14 @@ hm := health.New(
 hm.Start()
 ```
 
+## Checks
+
+| Check | Description |
+| --- | --- |
+| `http.Head` | Sends HTTP HEAD requests to the given URL. Expects response with status code 2XX. |
+| `mongo.Ping` | Pings MongoDB through the given client. |
+| `redis.Ping` | Pings Redis through the given client. |
+
 ## Documentation
 
 - [Reference](https://godoc.org/github.com/gocrumb/health)
@@ -42,3 +50,9 @@ Contributions are welcome.
 ## License
 
 This package is available under the [BSD (3-Clause) License](https://opensource.org/licenses/BSD-3-Clause).
+
+## TODO
+
+- [ ] Check: TCP connection, fails on disconnect.
+- [ ] Check: RabbitMQ
+- [ ] Beacon: Send periodic pings to remote health monitoring service (e.g. healthchecks.io)
