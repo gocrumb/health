@@ -1,6 +1,6 @@
 package health
 
-//go:generate gostringer -type=Status
+//go:generate stringer -type=Status
 type Status int
 
 const (
