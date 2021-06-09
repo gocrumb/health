@@ -27,5 +27,5 @@ func Ping(c *mongo.Client, opts ...Option) health.Check {
 }
 
 func (k check) run() error {
-	return k.c.Ping()
+	return k.c.Ping(ctx.TODO(), nil)
 }
