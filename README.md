@@ -23,7 +23,7 @@ hm := health.New(
 		mongo.Ping(mongoClient, mongo.Period(1*time.Minute), mongo.ReadPref(rp)),
 		redis.Ping(redisClient), // Falls back to default period (5 minutes)
 	),
-	health.Logger(log.New(os.Stderr, "[Health] ", log.LstdFlags|log.Lmsgprefix)),
+	health.Logger(slog.New(slog.NewTextHandler(os.Stderr, nil))),
 	health.OnFailure(func() {
 		log.Fatal("Health check failed; exiting")
 	}),

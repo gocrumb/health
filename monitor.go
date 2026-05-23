@@ -2,7 +2,7 @@ package health
 
 import (
 	"io"
-	"log"
+	"log/slog"
 	"net/http"
 	"sync"
 )
@@ -15,14 +15,14 @@ type Monitor struct {
 	wg         sync.WaitGroup
 	stop, done chan struct{}
 	failfns    []func()
-	l          *log.Logger
+	l          *slog.Logger
 }
 
 func New(opts ...Option) *Monitor {
 	m := Monitor{
 		states: map[Check]State{},
 		trs:    make(chan transaction),
-		l:      log.New(io.Discard, "", 0),
+		l:      slog.New(slog.NewTextHandler(io.Discard, nil)),
 	}
 	for _, o := range opts {
 		o.Apply(&m)
@@ -31,7 +31,7 @@ func New(opts ...Option) *Monitor {
 }
 
 func (m *Monitor) Start() {
-	m.l.Print("Starting")
+	m.l.Info("Starting")
 
 	m.stop = make(chan struct{})
 	m.done = make(chan struct{})
@@ -84,7 +84,7 @@ func (m *Monitor) Start() {
 }
 
 func (m *Monitor) Stop() {
-	m.l.Print("Stopping")
+	m.l.Info("Stopping")
 
 	close(m.stop)
 	m.wg.Wait()
@@ -107,7 +107,7 @@ func (m *Monitor) loop() {
 					}
 				}
 				if m.status != status {
-					m.l.Printf("%s -> %s", m.status, status)
+					m.l.Info("Status change", "from", m.status, "to", status)
 					m.status = status
 				}
 

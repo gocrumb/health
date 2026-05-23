@@ -1,6 +1,6 @@
 package health
 
-import "log"
+import "log/slog"
 
 type Option interface {
 	Apply(*Monitor)
@@ -18,7 +18,7 @@ func Checks(checks ...Check) Option {
 	})
 }
 
-func Logger(l *log.Logger) Option {
+func Logger(l *slog.Logger) Option {
 	return OptionFunc(func(m *Monitor) {
 		m.l = l
 	})
