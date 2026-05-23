@@ -20,7 +20,7 @@ func Checks(checks ...Check) Option {
 
 func Logger(l *slog.Logger) Option {
 	return OptionFunc(func(m *Monitor) {
-		m.l = l
+		m.l = l.With("module", "gocrumb/health")
 	})
 }
 
