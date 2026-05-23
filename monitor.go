@@ -31,7 +31,7 @@ func New(opts ...Option) *Monitor {
 }
 
 func (m *Monitor) Start() {
-	m.l.Info("Starting")
+	m.l.Info("starting")
 
 	m.stop = make(chan struct{})
 	m.done = make(chan struct{})
@@ -84,7 +84,7 @@ func (m *Monitor) Start() {
 }
 
 func (m *Monitor) Stop() {
-	m.l.Info("Stopping")
+	m.l.Info("stopping")
 
 	close(m.stop)
 	m.wg.Wait()
@@ -107,7 +107,7 @@ func (m *Monitor) loop() {
 					}
 				}
 				if m.status != status {
-					m.l.Info("Status change", "from", m.status, "to", status)
+					m.l.Info("status change", "from", m.status, "to", status)
 					m.status = status
 				}
 
