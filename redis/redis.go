@@ -1,6 +1,7 @@
 package redis
 
 import (
+	"context"
 	"time"
 
 	"github.com/go-redis/redis/v8"
@@ -25,5 +26,5 @@ func Ping(c *redis.Client, opts ...Option) health.Check {
 }
 
 func (k check) run() error {
-	return k.c.Ping().Err()
+	return k.c.Ping(context.Background()).Err()
 }
